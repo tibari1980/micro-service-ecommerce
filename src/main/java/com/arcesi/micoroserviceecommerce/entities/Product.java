@@ -52,10 +52,11 @@ public class Product extends AbstractEntity{
 	private Category category;
 
 	@Builder
-	public Product(Instant createdAt, Instant updatedAt, Boolean isActive, String codeUniqueProduct,
+	public Product(Instant createdAt, Instant updatedAt, Boolean isActive, Long idProduct, String codeUniqueProduct,
 			String designation, String description, double prixUnitaire, int quantiteStock, Boolean isDisponible,
 			Boolean isPromotion, String imageProduct, Category category) {
 		super(createdAt, updatedAt, isActive);
+		this.idProduct = idProduct;
 		this.codeUniqueProduct = codeUniqueProduct;
 		this.designation = designation;
 		this.description = description;
@@ -66,7 +67,8 @@ public class Product extends AbstractEntity{
 		this.imageProduct = imageProduct;
 		this.category = category;
 	}
-	
+
+	 
 	 
 	
 	
