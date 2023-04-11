@@ -1,4 +1,4 @@
-package com.arcesi.micoroserviceecommerce.dtos;
+package com.arcesi.micoroserviceecommerce.dtos.responses;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -22,7 +22,7 @@ import lombok.ToString;
 @EntityListeners(AuditingEntityListener.class)
 @EqualsAndHashCode
 @ToString
-public class AbstractEntityDTO  implements Serializable{
+public class EntityAbstractResponse implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

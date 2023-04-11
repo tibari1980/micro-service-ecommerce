@@ -2,6 +2,8 @@ package com.arcesi.micoroserviceecommerce.dtos;
 
 import java.time.Instant;
 
+import com.arcesi.micoroserviceecommerce.dtos.requests.ProductRequest;
+import com.arcesi.micoroserviceecommerce.dtos.responses.ProductResponse;
 import com.arcesi.micoroserviceecommerce.entities.Product;
 
 import lombok.Builder;
@@ -27,7 +29,6 @@ public class ProductDTO  extends AbstractEntityDTO{
  	private Boolean isDisponible;
  	private Boolean isPromotion;
  	private String imageProduct;
-	
  	private CategoryDTO categoryDTO;
 
  	@Builder
@@ -61,9 +62,11 @@ public class ProductDTO  extends AbstractEntityDTO{
  		return ProductDTO.builder()
  				.idProduct(bean.getIdProduct())
  				.codeUniqueProduct(bean.getCodeUniqueProduct())
+ 				.description(bean.getDescription())
+ 				.designation(bean.getDesignation())
  				.createdAt(bean.getCreatedAt())
  				.updatedAt(bean.getUpdatedAt())
- 				.categoryDTO(null)
+ 				.categoryDTO(CategoryDTO.toEntity(bean.getCategory()))
  				.prixUnitaire(bean.getPrixUnitaire())
  				.quantiteStock(bean.getQuantiteStock())
  				.isDisponible(bean.getIsDisponible())
@@ -98,6 +101,55 @@ public class ProductDTO  extends AbstractEntityDTO{
  				.isPromotion(dto.getIsPromotion())
  				.description(dto.getDescription())
  				.designation(dto.getDesignation())
+ 				.build();
+ 	}
+ 	
+ 	/**
+ 	 * Méthode permettant de mapper un dto vers un object response
+ 	 * @param dto {@link ProductDTO}
+ 	 * @return response {@link ProductResponse}
+ 	 */
+ 	public static ProductResponse  productDtoToProductResponse(ProductDTO dto) {
+ 		if(null==dto) {
+ 			return null;
+ 		}
+ 		return ProductResponse.builder()
+ 				.codeUniqueProduct(dto.getCodeUniqueProduct())
+ 				.idProduct(dto.getIdProduct())
+ 				.createdAt(dto.getCreatedAt())
+ 				.updatedAt(dto.getUpdatedAt())
+ 				.description(dto.getDescription())
+ 				.designation(dto.getDesignation())
+ 				.prixUnitaire(dto.getPrixUnitaire())
+ 				.isActive(dto.getIsActive())
+ 				.isPromotion(dto.getIsPromotion())
+ 				.isDisponible(dto.getIsDisponible())
+ 				.imageProduct(dto.getImageProduct())
+ 				.categoryResponse(CategoryDTO.CategoryDtoToCategoryResponse(dto.getCategoryDTO()))
+ 				.build();
+ 	}
+ 	
+ 	/**
+ 	 * Méthode permettant de mapper un objet request vers un objet dto
+ 	 * @param request {@link ProductRequest}
+ 	 * @return dto {@link ProductDTO}
+ 	 */
+ 	public static ProductDTO productRequestToProductDto(ProductRequest request)
+ 	{
+ 		if(null==request) {
+ 			return null;
+ 		}
+ 		return ProductDTO.builder()
+ 				.idProduct(request.getIdProduct())
+ 				.codeUniqueProduct(request.getCodeUniqueProduct())
+ 				.description(request.getDescription())
+ 				.designation(request.getDesignation())
+ 				.imageProduct(request.getImageProduct())
+ 				.isDisponible(request.getIsDisponible())
+ 				.isPromotion(request.getIsPromotion())
+ 				.prixUnitaire(request.getPrixUnitaire())
+ 				.quantiteStock(request.getQuantiteStock())
+ 				.categoryDTO(null)
  				.build();
  	}
 }
