@@ -6,7 +6,6 @@ import java.util.Collection;
 import com.arcesi.micoroserviceecommerce.dtos.requests.CategoryRequest;
 import com.arcesi.micoroserviceecommerce.dtos.responses.CategoryResponse;
 import com.arcesi.micoroserviceecommerce.entities.Category;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Builder;
 import lombok.Getter;
