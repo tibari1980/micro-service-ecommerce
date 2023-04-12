@@ -24,18 +24,16 @@ public class CategoryResponse  extends EntityAbstractResponse{
 	private String codeUniqueCategory;
  	private String libelleCategory;
  	private String descriptionCategory;
- 	private Collection<ProductDTO> productDTOs;
+
 	
  	@Builder
  	public CategoryResponse(Instant createdAt, Instant updatedAt, Boolean isActive, Long codeCategory,
-			String codeUniqueCategory, String libelleCategory, String descriptionCategory,
-			Collection<ProductDTO> productDTOs) {
+			String codeUniqueCategory, String libelleCategory, String descriptionCategory) {
 		super(createdAt, updatedAt, isActive);
 		this.codeCategory = codeCategory;
 		this.codeUniqueCategory = codeUniqueCategory;
 		this.libelleCategory = libelleCategory;
 		this.descriptionCategory = descriptionCategory;
-		this.productDTOs = productDTOs;
 	}
  	
  	

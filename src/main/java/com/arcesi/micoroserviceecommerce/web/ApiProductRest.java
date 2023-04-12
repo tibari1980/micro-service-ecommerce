@@ -11,6 +11,6 @@ import com.arcesi.micoroserviceecommerce.dtos.responses.ProductResponse;
 
 public interface ApiProductRest {
 
-	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "all", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<ProductResponse>> findAllProduct(@RequestParam(name="page",defaultValue = "0") final int page,@RequestParam(name="limit",defaultValue = "10")final int limit);
 }

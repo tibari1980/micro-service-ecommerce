@@ -1,20 +1,15 @@
 package com.arcesi.micoroserviceecommerce.entities;
 
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.Collection;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -42,8 +37,6 @@ public class Category extends AbstractEntity {
 	@Column(name = "DESCRIPTION_CATEGORY", nullable = false, insertable = true, length = 255)
 	private String descriptionCategory;
 	
-	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	private Collection<Product> products;
 
 	@Builder
 	public Category(Instant createdAt, Instant updatedAt, Boolean isActive, Long codeCategory,
@@ -54,7 +47,7 @@ public class Category extends AbstractEntity {
 		this.codeUniqueCategory = codeUniqueCategory;
 		this.libelleCategory = libelleCategory;
 		this.descriptionCategory = descriptionCategory;
-		this.products = products;
+	   
 	}
 
 	 

@@ -2,8 +2,14 @@ package com.arcesi.micoroserviceecommerce.entities;
 
 import java.time.Instant;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -47,8 +53,10 @@ public class Product extends AbstractEntity{
 	@Column(name="IMAGE_PRODUCT")
 	private String imageProduct;
 	
-	@ManyToOne
-	@JoinColumn(name="codeCategory")
+	@ManyToOne(fetch = FetchType.EAGER,optional = false)
+	@JoinColumn(name="CODE_CATEGORY",nullable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JsonIgnore
 	private Category category;
 
 	@Builder

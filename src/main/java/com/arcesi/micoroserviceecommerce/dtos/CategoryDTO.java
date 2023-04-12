@@ -1,7 +1,6 @@
 package com.arcesi.micoroserviceecommerce.dtos;
 
 import java.time.Instant;
-import java.util.Collection;
 
 import com.arcesi.micoroserviceecommerce.dtos.requests.CategoryRequest;
 import com.arcesi.micoroserviceecommerce.dtos.responses.CategoryResponse;
@@ -26,18 +25,17 @@ public class CategoryDTO extends AbstractEntityDTO {
 	private String codeUniqueCategory;
  	private String libelleCategory;
  	private String descriptionCategory;
- 	private Collection<ProductDTO> productDTOs;
+ 	 
 	
  	@Builder
 	public CategoryDTO(Instant createdAt, Instant updatedAt, Boolean isActive, Long codeCategory,
-			String codeUniqueCategory, String libelleCategory, String descriptionCategory,
-			Collection<ProductDTO> productDTOs) {
+			String codeUniqueCategory, String libelleCategory, String descriptionCategory) {
 		super(createdAt, updatedAt, isActive);
 		this.codeCategory = codeCategory;
 		this.codeUniqueCategory = codeUniqueCategory;
 		this.libelleCategory = libelleCategory;
 		this.descriptionCategory = descriptionCategory;
-		this.productDTOs = productDTOs;
+		 
 	}
  	
  	/**
@@ -78,7 +76,6 @@ public class CategoryDTO extends AbstractEntityDTO {
  				.isActive(dto.getIsActive())
  				.descriptionCategory(dto.getDescriptionCategory())
  				.libelleCategory(dto.getLibelleCategory())
- 				.products(null)
  				.build();
  	}
 
