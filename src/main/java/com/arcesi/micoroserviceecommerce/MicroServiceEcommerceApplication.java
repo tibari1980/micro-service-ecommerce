@@ -39,7 +39,7 @@ public class MicroServiceEcommerceApplication {
      			.createdAt(Instant.now())
      			.updatedAt(Instant.now())
      			.codeUniqueCategory(UUID.randomUUID().toString())
-     			.isActive(Boolean.TRUE)
+     			.isActive(Boolean.FALSE)
      			.libelleCategory("TELEPHONE")
      			.descriptionCategory("La description des téléphones")
      			.build(); 
@@ -50,7 +50,7 @@ public class MicroServiceEcommerceApplication {
      			.createdAt(Instant.now())
      			.codeUniqueCategory(UUID.randomUUID().toString())
      			.updatedAt(Instant.now())
-     			.isActive(Boolean.TRUE)
+     			.isActive(Boolean.FALSE)
      			.libelleCategory("LIVRE")
      			.descriptionCategory("La description des livres")
      			.build(); 

@@ -9,4 +9,8 @@ public interface ICategoryService {
 	public List<CategoryDTO> findByLibelleCategoryContaining(final String libelle,final int page,final int limit);
 
 	public CategoryDTO findByCodeCategory(final Long idCategory);
+
+	public CategoryDTO findByCodeUniqueCategory(final String codeUnique);
+
+	public List<CategoryDTO> findByIsActive(Boolean value,final int page, final  int limit);
 }
