@@ -13,4 +13,12 @@ public interface ICategoryService {
 	public CategoryDTO findByCodeUniqueCategory(final String codeUnique);
 
 	public List<CategoryDTO> findByIsActive(Boolean value,final int page, final  int limit);
+
+	public CategoryDTO createCategory(final CategoryDTO categoryDTO);
+
+	public CategoryDTO updateCategory(final CategoryDTO categoryRequestToCategoryDto,final Long codeCateg);
+
+	public void deleteCategoryById(Long codeCategory);
+
+	public void deleteAllCategories();
 }

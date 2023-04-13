@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.arcesi.micoroserviceecommerce.dtos.ProductDTO;
 import com.arcesi.micoroserviceecommerce.entities.Product;
+import com.arcesi.micoroserviceecommerce.exceptions.EntityNotFoundException;
+import com.arcesi.micoroserviceecommerce.exceptions.enums.ErrorsCodesEnemuration;
 import com.arcesi.micoroserviceecommerce.repositories.ProductRepository;
 import com.arcesi.micoroserviceecommerce.service.IProductService;
 
@@ -43,7 +45,7 @@ public class ProductServiceImp implements IProductService {
 
 		List<Product> lstProducts = pageProducts.getContent();
 		if (lstProducts.isEmpty()) {
-			return null;
+			throw new EntityNotFoundException("List of product is empty ",ErrorsCodesEnemuration.PRODUCT_NOT_FOUND);
 		}
 		List<ProductDTO> lstProductDTOS = lstProducts.stream().map(ProductDTO::toEntity).collect(Collectors.toList());
 		return lstProductDTOS;

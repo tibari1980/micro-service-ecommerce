@@ -1,9 +1,6 @@
 package com.arcesi.micoroserviceecommerce.dtos.responses;
 
 import java.time.Instant;
-import java.util.Collection;
-
-import com.arcesi.micoroserviceecommerce.dtos.ProductDTO;
 
 import lombok.Builder;
 import lombok.Getter;

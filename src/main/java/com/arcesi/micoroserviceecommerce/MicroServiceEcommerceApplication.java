@@ -26,7 +26,6 @@ public class MicroServiceEcommerceApplication {
     	
     	 Category ordinateur=Category.builder()
     			.createdAt(Instant.now())
-    			.updatedAt(Instant.now())
     			.codeUniqueCategory(UUID.randomUUID().toString())
     			.isActive(Boolean.FALSE)
     			.libelleCategory("ORDINATEUR")
@@ -37,7 +36,7 @@ public class MicroServiceEcommerceApplication {
     	
     	 Category telephone=Category.builder()
      			.createdAt(Instant.now())
-     			.updatedAt(Instant.now())
+     			
      			.codeUniqueCategory(UUID.randomUUID().toString())
      			.isActive(Boolean.FALSE)
      			.libelleCategory("TELEPHONE")
@@ -49,7 +48,7 @@ public class MicroServiceEcommerceApplication {
     	 Category livre=Category.builder()
      			.createdAt(Instant.now())
      			.codeUniqueCategory(UUID.randomUUID().toString())
-     			.updatedAt(Instant.now())
+     			
      			.isActive(Boolean.FALSE)
      			.libelleCategory("LIVRE")
      			.descriptionCategory("La description des livres")
@@ -60,7 +59,6 @@ public class MicroServiceEcommerceApplication {
     	 for(int i=0;i<300;i++) {
     		 Product product=Product.builder()
     				 .createdAt(Instant.now())
-    				 .updatedAt(Instant.now())
     				 .isActive(Boolean.TRUE)
     				 .codeUniqueProduct(UUID.randomUUID().toString())
     				 .designation("HP N°:"+i+"SN")
@@ -77,7 +75,6 @@ public class MicroServiceEcommerceApplication {
     		 
     		 Product productTelephone=Product.builder()
     				 .createdAt(Instant.now())
-    				 .updatedAt(Instant.now())
     				 .isActive(Boolean.TRUE)
     				 .codeUniqueProduct(UUID.randomUUID().toString())
     				 .designation("SAMUSUNG GALAXY"+i+"PRO")
@@ -94,7 +91,7 @@ public class MicroServiceEcommerceApplication {
     		 
     		 Product productLivre=Product.builder()
     				 .createdAt(Instant.now())
-    				 .updatedAt(Instant.now())
+    				
     				 .isActive(Boolean.TRUE)
     				 .codeUniqueProduct(UUID.randomUUID().toString())
     				 .designation("LIVRE CUISINE FRANÇAISE"+i+"PRO")

@@ -48,4 +48,11 @@ public class InvalidEntityException extends RuntimeException {
 		super(message);
 		this.codesErrorsEnemuration = codesEnemuration;
 	}
+	
+	public InvalidEntityException(String message,final ErrorsCodesEnemuration codesEnemuration,
+			final List<String> errors) {
+		super(message);
+		this.codesErrorsEnemuration = codesEnemuration;
+		this.errors = errors;
+	}
 }

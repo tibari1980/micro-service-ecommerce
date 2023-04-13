@@ -70,12 +70,12 @@ public class CategoryDTO extends AbstractEntityDTO {
  		
  		return Category.builder()
  				.codeCategory(dto.getCodeCategory())
- 				.codeUniqueCategory(dto.getCodeUniqueCategory())
+ 				.codeUniqueCategory(dto.getCodeUniqueCategory().trim())
  				.createdAt(dto.getCreatedAt())
  				.updatedAt(dto.getUpdatedAt())
  				.isActive(dto.getIsActive())
- 				.descriptionCategory(dto.getDescriptionCategory())
- 				.libelleCategory(dto.getLibelleCategory())
+ 				.descriptionCategory(dto.getDescriptionCategory().trim())
+ 				.libelleCategory(dto.getLibelleCategory().trim())
  				.build();
  	}
 
@@ -107,7 +107,6 @@ public class CategoryDTO extends AbstractEntityDTO {
  			return null;
  		}
  		return CategoryDTO.builder()
- 				.codeCategory(bean.getCodeCategory())
  				.libelleCategory(bean.getLibelleCategory())
  				.descriptionCategory(bean.getDescriptionCategory())
  				.build();

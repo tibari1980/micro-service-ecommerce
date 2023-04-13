@@ -1,5 +1,7 @@
 package com.arcesi.micoroserviceecommerce.exceptions.handlers;
 
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,6 +16,7 @@ import com.arcesi.micoroserviceecommerce.exceptions.InvalidEntityException;
  * @author tibari
  * Ingénieur développement
  */
+@Order(Ordered.LOWEST_PRECEDENCE)
 @RestControllerAdvice
 
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {

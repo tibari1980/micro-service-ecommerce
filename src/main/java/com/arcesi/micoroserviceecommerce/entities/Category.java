@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,9 +33,10 @@ public class Category extends AbstractEntity {
 	private Long codeCategory;
 	@Column(name = "CODE_UNIQUE_CATEGORY", insertable = true, updatable = false, unique = true)
 	private String codeUniqueCategory;
-	@Column(name = "LIBELLE_CATEGORY", insertable = true, unique = true, updatable = true, nullable = false)
+	@Column(name = "LIBELLE_CATEGORY",unique=true, insertable = true, updatable = true, nullable = false)
 	private String libelleCategory;
-	@Column(name = "DESCRIPTION_CATEGORY", nullable = false, insertable = true, length = 255)
+	@Column(name = "DESCRIPTION_CATEGORY", nullable = false, insertable = true)
+	@Lob
 	private String descriptionCategory;
 	
 
