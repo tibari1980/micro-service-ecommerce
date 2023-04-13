@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.arcesi.micoroserviceecommerce.dtos.requests.CategoryRequest;
+import com.arcesi.micoroserviceecommerce.dtos.requests.ProductRequest;
 import com.arcesi.micoroserviceecommerce.dtos.responses.CategoryResponse;
+import com.arcesi.micoroserviceecommerce.dtos.responses.ProductResponse;
 
 public interface ApiCategoryRest {
 
@@ -44,9 +46,14 @@ public interface ApiCategoryRest {
 	public ResponseEntity<CategoryResponse> updateCategory(@RequestBody CategoryRequest cat,
 			@PathVariable(name = "codeCategory") Long codeCategory);
 
-	@DeleteMapping(value = {"/", "", "/{codeCategory}" })
+	@DeleteMapping(value = { "/", "", "/{codeCategory}" })
 	public ResponseEntity<HttpStatus> deleteCategory(@PathVariable Optional<String> codeCategory);
 
 	@DeleteMapping(value = "/deleteAllCategories")
 	public ResponseEntity<HttpStatus> deleteAllCategories();
+
+	@PostMapping(value = "/{CategoryId}/products")
+	public ResponseEntity<ProductResponse> createProduct(@RequestBody ProductRequest productRequest,
+			@PathVariable("CategoryId") Long CategoryId);
+
 }

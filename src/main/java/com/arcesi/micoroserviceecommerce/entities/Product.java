@@ -14,6 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Builder;
@@ -35,12 +36,13 @@ public class Product extends AbstractEntity{
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="ID_PRODUCT")
 	private Long idProduct;
-	@Column(name="CODE_UNIQUE_PRODUCT")
+	@Column(name="CODE_UNIQUE_PRODUCT",insertable = true,nullable = false)
 	private String codeUniqueProduct;
-	@Column(name="DESIGNATION",unique = true,insertable = true,updatable = true,length = 60)
+	@Column(name="DESIGNATION",insertable = true,updatable = true,length = 60)
 	private String designation;
 	
-	@Column(name="DESCRIPTION",insertable = true,updatable = true,length = 255)
+	@Column(name="DESCRIPTION",insertable = true,updatable = true)
+	@Lob
 	private String description;
 	@Column(name="PRIX_UNITAIRE",insertable = true,updatable = true)
 	private double prixUnitaire;

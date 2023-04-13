@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.arcesi.micoroserviceecommerce.dtos.CategoryDTO;
+import com.arcesi.micoroserviceecommerce.dtos.ProductDTO;
 import com.arcesi.micoroserviceecommerce.dtos.requests.CategoryRequest;
+import com.arcesi.micoroserviceecommerce.dtos.requests.ProductRequest;
 import com.arcesi.micoroserviceecommerce.dtos.responses.CategoryResponse;
+import com.arcesi.micoroserviceecommerce.dtos.responses.ProductResponse;
 import com.arcesi.micoroserviceecommerce.exceptions.InvalidEntityException;
 import com.arcesi.micoroserviceecommerce.exceptions.enums.ErrorsCodesEnemuration;
 import com.arcesi.micoroserviceecommerce.service.ICategoryService;
@@ -134,6 +137,14 @@ public class CategoryRestController implements ApiCategoryRest {
 		log.info("Inside méthode deleteAllCategories in Controller CategoryRestController ");
 		iCategoryService.deleteAllCategories();
 		return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
+	}
+
+	@Override
+	public ResponseEntity<ProductResponse> createProduct(ProductRequest productRequest, Long categoryId) {
+		log.info("Inside méthode createProduct in Controller CategoryRestController  products: {} ,identifiant category : {}",productRequest.toString(), categoryId);
+		ProductDTO productDTO=iCategoryService.createProduct(ProductDTO.productRequestToProductDto(productRequest),categoryId);
+		
+		return new ResponseEntity<ProductResponse>(ProductDTO.productDtoToProductResponse(productDTO),HttpStatus.CREATED);
 	}
 
 	

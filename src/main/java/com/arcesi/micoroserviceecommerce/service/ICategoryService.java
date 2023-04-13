@@ -3,6 +3,7 @@ package com.arcesi.micoroserviceecommerce.service;
 import java.util.List;
 
 import com.arcesi.micoroserviceecommerce.dtos.CategoryDTO;
+import com.arcesi.micoroserviceecommerce.dtos.ProductDTO;
 
 public interface ICategoryService {
 
@@ -18,7 +19,9 @@ public interface ICategoryService {
 
 	public CategoryDTO updateCategory(final CategoryDTO categoryRequestToCategoryDto,final Long codeCateg);
 
-	public void deleteCategoryById(Long codeCategory);
+	public void deleteCategoryById(final Long codeCategory);
 
 	public void deleteAllCategories();
+
+	public ProductDTO createProduct(final ProductDTO productDto, Long categoryId);
 }

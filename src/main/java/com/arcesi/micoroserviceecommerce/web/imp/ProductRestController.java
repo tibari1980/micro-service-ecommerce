@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @AllArgsConstructor
 @Slf4j
-@RequestMapping(value="/products/api/v1/")
+@RequestMapping(value="/api/v1/products")
 public class ProductRestController implements ApiProductRest {
 
 	private IProductService iProductService;

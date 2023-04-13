@@ -5,6 +5,8 @@ import java.time.Instant;
 import com.arcesi.micoroserviceecommerce.dtos.requests.ProductRequest;
 import com.arcesi.micoroserviceecommerce.dtos.responses.ProductResponse;
 import com.arcesi.micoroserviceecommerce.entities.Product;
+import com.arcesi.micoroserviceecommerce.exceptions.InvalidEntityException;
+import com.arcesi.micoroserviceecommerce.exceptions.enums.ErrorsCodesEnemuration;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -57,7 +59,7 @@ public class ProductDTO  extends AbstractEntityDTO{
  	public static ProductDTO toEntity(Product bean)
  	{
  		if(null==bean) {
- 			return null;
+ 			throw new InvalidEntityException("Product is not valid try again",ErrorsCodesEnemuration.PRODUCT_NOT_VALIDE);
  		}
  		return ProductDTO.builder()
  				.idProduct(bean.getIdProduct())
@@ -85,7 +87,7 @@ public class ProductDTO  extends AbstractEntityDTO{
  	public static Product fromEntity(ProductDTO dto) {
  		if(null==dto)
  		{
- 			return null;
+ 			throw new InvalidEntityException("Product is not valid try again" , ErrorsCodesEnemuration.PRODUCT_NOT_VALIDE);
  		}
  		return Product.builder()
  				.idProduct(dto.getIdProduct())
@@ -96,7 +98,7 @@ public class ProductDTO  extends AbstractEntityDTO{
  				.quantiteStock(dto.getQuantiteStock())
  				.isActive(dto.getIsActive())
  				.isDisponible(dto.getIsDisponible())
- 				.category(null)
+ 				.category(CategoryDTO.fromEntiry(dto.getCategoryDTO()))
  				.imageProduct(dto.getImageProduct())
  				.isPromotion(dto.getIsPromotion())
  				.description(dto.getDescription())
@@ -111,7 +113,7 @@ public class ProductDTO  extends AbstractEntityDTO{
  	 */
  	public static ProductResponse  productDtoToProductResponse(ProductDTO dto) {
  		if(null==dto) {
- 			return null;
+ 			throw new InvalidEntityException("Product is not valid try again please",ErrorsCodesEnemuration.PRODUCT_NOT_VALIDE);
  		}
  		return ProductResponse.builder()
  				.codeUniqueProduct(dto.getCodeUniqueProduct())
@@ -120,6 +122,7 @@ public class ProductDTO  extends AbstractEntityDTO{
  				.updatedAt(dto.getUpdatedAt())
  				.description(dto.getDescription())
  				.designation(dto.getDesignation())
+ 				.quantiteStock(dto.getQuantiteStock())
  				.prixUnitaire(dto.getPrixUnitaire())
  				.isActive(dto.getIsActive())
  				.isPromotion(dto.getIsPromotion())
@@ -137,11 +140,9 @@ public class ProductDTO  extends AbstractEntityDTO{
  	public static ProductDTO productRequestToProductDto(ProductRequest request)
  	{
  		if(null==request) {
- 			return null;
+ 			throw new InvalidEntityException("Product is not valid try again please",ErrorsCodesEnemuration.PRODUCT_NOT_VALIDE);
  		}
  		return ProductDTO.builder()
- 				.idProduct(request.getIdProduct())
- 				.codeUniqueProduct(request.getCodeUniqueProduct())
  				.description(request.getDescription())
  				.designation(request.getDesignation())
  				.imageProduct(request.getImageProduct())

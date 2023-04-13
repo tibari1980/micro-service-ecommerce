@@ -5,6 +5,8 @@ import java.time.Instant;
 import com.arcesi.micoroserviceecommerce.dtos.requests.CategoryRequest;
 import com.arcesi.micoroserviceecommerce.dtos.responses.CategoryResponse;
 import com.arcesi.micoroserviceecommerce.entities.Category;
+import com.arcesi.micoroserviceecommerce.exceptions.InvalidEntityException;
+import com.arcesi.micoroserviceecommerce.exceptions.enums.ErrorsCodesEnemuration;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -87,7 +89,7 @@ public class CategoryDTO extends AbstractEntityDTO {
  	 */
  	public static CategoryResponse CategoryDtoToCategoryResponse(CategoryDTO dto) {
  		if(null==dto) {
- 			return null;
+ 			throw new InvalidEntityException("Category is not valid try again ",ErrorsCodesEnemuration.CATEGORY_NOT_VALIDE);
  		}
  		
  		return CategoryResponse.builder()

@@ -12,8 +12,7 @@ import lombok.NoArgsConstructor;
 public class ProductRequest implements Serializable{
 
 	private static final long serialVersionUID = 1L;
- 	private Long idProduct;
- 	private String codeUniqueProduct;
+ 	 
  	private String designation;
 	
  	private String description;
@@ -23,5 +22,4 @@ public class ProductRequest implements Serializable{
  	private Boolean isPromotion;
  	private String imageProduct;
 	
- 	private CategoryRequest categoryResquest;
 }
