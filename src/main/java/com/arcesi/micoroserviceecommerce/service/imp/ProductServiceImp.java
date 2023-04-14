@@ -33,18 +33,15 @@ public class ProductServiceImp implements IProductService {
 	private ProductRepository productRepository;
 
 	@Override
-	public List<ProductDTO> findAllProduct(int page, int limit) {
-		log.info("Inside method findAllProduct in Service ProductServiceImp page : {} , limi : {} ", page, limit);
+	public List<ProductDTO> findAllProduct(final String designation, int page, int limit) {
+		log.info("Inside method findAllProduct in Service ProductServiceImp page : {} , limi : {}  , Designation : {}", page, limit,designation);
 		if (page > 0) {
 			page = page - 1;
 		}
 		Pageable pageable = PageRequest.of(page, limit, Sort.by("idProduct").descending());
-		Page<Product> pageProducts = productRepository.findAll(pageable);
+		Page<Product> pageProducts = productRepository.findByDesignationContaining(designation,pageable);
 
 		List<Product> lstProducts = pageProducts.getContent();
-		if (lstProducts.isEmpty()) {
-			throw new EntityNotFoundException("List of product is empty ", ErrorsCodesEnemuration.PRODUCT_NOT_FOUND);
-		}
 		List<ProductDTO> lstProductDTOS = lstProducts.stream().map(ProductDTO::toEntity).collect(Collectors.toList());
 		return lstProductDTOS;
 	}
@@ -119,6 +116,20 @@ public class ProductServiceImp implements IProductService {
 		List<Product> lsProducts=pageProducts.getContent();
 		
 		return lsProducts.stream().map(ProductDTO::toEntity).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<ProductDTO> getAllProductDisponibleEnPromotionAvecPrixCategory(Boolean isDisponible,
+			Boolean isPromotion, Double prixUnitaire, int page, int limit, Long codeCategory) {
+		log.info("Inside methode getAllProductDisponibleEnPromotionAvecPrixCategory in Service ProductServiceImp  Disponible : {} , Promotion : {} , Prix Unitaire : {} , Page : {} , Limit : {} , Code Category : {}",isDisponible,isPromotion,prixUnitaire,page,limit,codeCategory);
+		if(page>0) {
+			page=page-1;
+		}
+		Pageable pageable=PageRequest.of(page, limit, Sort.by("prixUnitaire").descending());
+		Page<Product> pageProducts=productRepository.findByIsActiveTrueAndIsDisponibleTrueAndIsPromotionTrueAndPrixUnitaireGreaterThanEqualAndCategoryCodeCategory(prixUnitaire,codeCategory,pageable);
+		
+		List<Product> lstProducts=pageProducts.getContent();
+		return lstProducts.stream().map(ProductDTO::toEntity).collect(Collectors.toList());
 	}
 
 }

@@ -18,4 +18,9 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
 
 	Page<Product> findByIsActiveTrueAndCategoryCodeCategory(Long codeCategory, Pageable pageable);
 
+	Page<Product> findByDesignationContaining(String designation, Pageable pageable);
+
+	Page<Product> findByIsActiveTrueAndIsDisponibleTrueAndIsPromotionTrueAndPrixUnitaireGreaterThanEqualAndCategoryCodeCategory(
+			Double prixUnitaire, Long codeCategory, Pageable pageable);
+
 }

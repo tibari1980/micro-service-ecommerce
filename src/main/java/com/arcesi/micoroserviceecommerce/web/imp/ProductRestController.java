@@ -29,9 +29,9 @@ public class ProductRestController implements ApiProductRest {
 
 	private IProductService iProductService;
 	@Override
-	public ResponseEntity<List<ProductResponse>> findAllProduct(int page, int limit) {
+	public ResponseEntity<List<ProductResponse>> findAllProduct(String designation, int page, int limit) {
 		log.info("Inside methode findAllProduct in Controllers ProductRestControllers  page : {} , limit :{}",page,limit);
-		List<ProductDTO> productDTOs=iProductService.findAllProduct(page, limit);
+		List<ProductDTO> productDTOs=iProductService.findAllProduct(designation,page, limit);
 		List<ProductResponse> productResponses=productDTOs.stream().map(ProductDTO::productDtoToProductResponse).collect(Collectors.toList());
 		if(productResponses.isEmpty())
 		{
@@ -91,6 +91,25 @@ public class ProductRestController implements ApiProductRest {
 		}
 		return new ResponseEntity<List<ProductResponse>>(lstResponses,HttpStatus.OK);
 	}
+	@Override
+	public ResponseEntity<List<ProductResponse>> findAllProductByCategoryDisponibleAndEnPromotionAndPrix(
+			Boolean isDisponible, Boolean isPromotion, String prixUnitaire, int page, int limit, String codeCategory) {
+		log.info("Inside methode findAllProductByCategoryDisponibleAndEnPromotionAndPrix in Controller  ProductRestController Disponible : {} , Promotion : {} , Prix unitaire : {} , Page : {} , Limit : {} , Cade Category : {} ", isDisponible,isPromotion,prixUnitaire,page,limit,codeCategory);
+		if(StringUtils.isEmpty(codeCategory)|| !StringUtils.isNumeric(codeCategory)) {
+			log.error("Cade Category is not valid try again  : {}",codeCategory);
+			throw new InvalidEntityException("Code category :`"+ codeCategory +"` is not valid try again ",ErrorsCodesEnemuration.PRODUCT_NOT_VALIDE);
+		}
+		
+		List<ProductDTO> lsDtos=iProductService.getAllProductDisponibleEnPromotionAvecPrixCategory(isDisponible,isPromotion,Double.parseDouble(prixUnitaire) ,page,limit,Long.parseLong(codeCategory));
+		List<ProductResponse> lstResponses=lsDtos.stream().map(ProductDTO::productDtoToProductResponse).collect(Collectors.toList());
+		if(CollectionUtils.isEmpty(lsDtos))
+		{
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<ProductResponse>>(lstResponses,HttpStatus.OK);
+
+	}
+	 
 
 	
 }

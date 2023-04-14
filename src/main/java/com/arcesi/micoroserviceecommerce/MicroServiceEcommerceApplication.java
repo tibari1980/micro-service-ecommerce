@@ -56,7 +56,7 @@ public class MicroServiceEcommerceApplication {
      
     	 categoryRepository.save(livre);
     	 
-    	 for(int i=0;i<300;i++) {
+    	 for(int i=0;i<1;i++) {
     		 Product product=Product.builder()
     				 .createdAt(Instant.now())
     				 .isActive(Boolean.TRUE)
@@ -64,7 +64,7 @@ public class MicroServiceEcommerceApplication {
     				 .designation("HP N°:"+i+"SN")
     				 .description("Ordinateur portable hp de qualité 1")
     				 .prixUnitaire(1500)
-    				 .quantiteStock(i+i+300)
+    				 .quantiteStock(i+30+300)
     				 .isDisponible(Boolean.TRUE)
     				 .isPromotion(Boolean.TRUE)
     				 .imageProduct("ordianteur"+i+"jpeg")
@@ -96,7 +96,7 @@ public class MicroServiceEcommerceApplication {
     				 .codeUniqueProduct(UUID.randomUUID().toString())
     				 .designation("LIVRE CUISINE FRANÇAISE"+i+"PRO")
     				 .description("Livre de la cuisine française ")
-    				 .prixUnitaire(i+30+15)
+    				 .prixUnitaire(250)
     				 .quantiteStock(i+i+300)
     				 .isDisponible(Boolean.TRUE)
     				 .isPromotion(Boolean.TRUE)
