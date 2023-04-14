@@ -3,8 +3,6 @@ package com.arcesi.micoroserviceecommerce.validators;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.print.attribute.standard.PDLOverrideSupported;
-
 import org.apache.commons.lang.StringUtils;
 
 import com.arcesi.micoroserviceecommerce.dtos.ProductDTO;
@@ -37,7 +35,25 @@ public class ProductValidators {
 				errors.add(IConstantErrorsEnemuration.PRODUCT_NOT_VALIDE_PRIX_UNITAIRE.getCode());
 			}
 			if(Utils.isBooleanFalse(ControleSyntaxe.isBigDecimal(String.valueOf(productDto.getPrixUnitaire())))){
-				errors.add(IConstantErrorsEnemuration.PRODUCT_NOT_VALIDE_PRIXUNITAIRE.getCode());
+				errors.add(IConstantErrorsEnemuration.PRODUCT_NOT_VALIDE_PRIXUNITAIRE_FORMAT.getCode());
+			}
+			//validation quantite en stock
+			if(productDto.getQuantiteStock()<=0) {
+				errors.add(IConstantErrorsEnemuration.PRODUCT_NOT_VALIDE_QUANTITESTOCK.getCode());
+			}else if(Utils.isBooleanFalse(ControleSyntaxe.isQuantiteEnStockValid(String.valueOf(productDto.getQuantiteStock())))) {
+				errors.add(IConstantErrorsEnemuration.PRODUCT_NOT_VALIDE_QUANTITESTOCK_FORMAT.getCode());
+			}
+			
+			if(productDto.getIsDisponible()==null) {
+				errors.add(IConstantErrorsEnemuration.PRODUCT_NOT_VALIDE_ISDISPONIBLE_OBLIGATOIRE.getCode());
+			}
+			
+			if(productDto.getIsPromotion()==null) {
+				errors.add(IConstantErrorsEnemuration.PRODUCT_NOT_VALIDE_ISPROMOTION_OBLIGATOIRE.getCode());
+			}
+			
+			if(Utils.isBooleanFalse(ControleSyntaxe.isImageValide(productDto.getImageProduct()))) {
+				errors.add(IConstantErrorsEnemuration.PRODUCT_NOT_VALIDE_IMAGE_FORMAT.getCode());
 			}
 		}
 		return errors;

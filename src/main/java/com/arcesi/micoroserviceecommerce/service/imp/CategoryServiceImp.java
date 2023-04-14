@@ -168,25 +168,32 @@ public class CategoryServiceImp implements ICategoryService {
 
 	@Override
 	public ProductDTO createProduct(ProductDTO productDto, Long categoryId) {
-		log.info("Inside méthode createProduct in Service CategoryServiceImp  objet ProductDTO : {} , Category Id : {}", productDto, categoryId);
-		List<String> errors=ProductValidators.validate(productDto);
-		if(CollectionUtils.isNotEmpty(errors)) {
-			log.error("Product is not valid try again : List of Errors  :{}",errors);
-			throw new InvalidEntityException("Product is not valid try again !",ErrorsCodesEnemuration.PRODUCT_NOT_VALIDE,errors);
+		log.info("Inside méthode createProduct in Service CategoryServiceImp  objet ProductDTO : {} , Category Id : {}",
+				productDto, categoryId);
+		List<String> errors = ProductValidators.validate(productDto);
+		if (CollectionUtils.isNotEmpty(errors)) {
+			log.error("Product is not valid try again : List of Errors  :{}", errors);
+			throw new InvalidEntityException("Product is not valid try again !",
+					ErrorsCodesEnemuration.PRODUCT_NOT_VALIDE, errors);
 		}
-		Category findCategory=categoryRepository.findById(categoryId).orElseThrow(()->new EntityNotFoundException("Category with id :` " +categoryId +"` not found in our data base .",ErrorsCodesEnemuration.CATEGORY_NOT_FOUND));
-		//check if designation exist in our data base
-		Optional<Product> product=productRepository.findByDesignationIgnoreCase(productDto.getDesignation());
-		
-		if(product.isPresent()) {
-			throw new InvalidEntityException("Product is not valid with this Designation : `" + productDto.getDesignation()+ "` please try again",ErrorsCodesEnemuration.PRODUCT_NOT_VALIDE);
+		Category findCategory = categoryRepository.findById(categoryId)
+				.orElseThrow(() -> new EntityNotFoundException(
+						"Category with id :` " + categoryId + "` not found in our data base .",
+						ErrorsCodesEnemuration.CATEGORY_NOT_FOUND));
+		// check if designation exist in our data base
+		Optional<Product> product = productRepository.findByDesignationIgnoreCase(productDto.getDesignation());
+
+		if (product.isPresent()) {
+			throw new InvalidEntityException("Product is not valid with this Designation : `"
+					+ productDto.getDesignation() + "` please try again", ErrorsCodesEnemuration.PRODUCT_NOT_VALIDE);
 		}
 		productDto.setCategoryDTO(CategoryDTO.toEntity(findCategory));
 		productDto.setCodeUniqueProduct(UUID.randomUUID().toString());
+		productDto.setIsActive(Boolean.TRUE);
 		productDto.setCreatedAt(Instant.now());
-		Product productCreated=productRepository.save(ProductDTO.fromEntity(productDto));
-		log.info("Product was created successfully ! : {} ",productCreated);
-		return ProductDTO.toEntity(productCreated) ;
+		Product productCreated = productRepository.save(ProductDTO.fromEntity(productDto));
+		log.info("Product was created successfully ! : {} ", productCreated);
+		return ProductDTO.toEntity(productCreated);
 	}
 
 }

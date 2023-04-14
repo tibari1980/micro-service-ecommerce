@@ -26,7 +26,7 @@ public class ControleSyntaxe {
 	private static final String ALPHA_PATTERN = "[a-zA-Z][a-zA-Z ]+[a-zA-Z]$";
 
 	// prix hors taxe, prix ttc,
-	private static final String BIG_DECIMAL_PATTERN = "(\\d+\\.\\d{1,2})";
+	private static final String BIG_DECIMAL_PATTERN = "^\\d{0,4}(?!(\\.|,)0{2})(\\.|,)\\d{1,2}$";
 	// tva
 	private static final String BIG_DECIMAL_PATTERN_TVA = "^(20|[1-9]?[0-9])$";
 
@@ -34,7 +34,12 @@ public class ControleSyntaxe {
 	private static final String EMAIL_PATTERN = "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$";
 
 	private static final String CODE_POSTAL_PATTERN = "[0-9]{5}";
-
+	
+	/** PATTERN QUANTITE EN STOCK **/
+	private static final String QUANTITE_STOCK_PATTERN = "^([1-9][0-9][0-9]?|1000)$";
+	
+    private static final String VALIDATION_BOOLEAN_PATTERN="^(0|1|true|false)$";
+	
 	private static final String DEPATEMENT_NAISSANCE = "[0-9]{3}";
 
 	private static final String TELEPHONE_PORTABLE_PATTERN = "^(\\+33|0|0033)[0-9]{9}$";
@@ -84,6 +89,24 @@ public class ControleSyntaxe {
 		return m.matches();
 
 	}
+
+	public static boolean isQuantiteEnStockValid(String str) {
+		Pattern p = Pattern.compile(QUANTITE_STOCK_PATTERN);
+		Matcher m = p.matcher(str);
+
+		return m.matches();
+
+	}
+	
+
+	public static boolean isBooleanValide(String str) {
+		Pattern p = Pattern.compile(VALIDATION_BOOLEAN_PATTERN);
+		Matcher m = p.matcher(str);
+
+		return m.matches();
+
+	}
+
 
 	public static boolean isBigDecimalTVA(String str) {
 		Pattern p = Pattern.compile(BIG_DECIMAL_PATTERN_TVA);
